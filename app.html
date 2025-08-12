@@ -1,32 +1,84 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-allow-motion="true">
 <head>
   <meta charset="utf-8">
   <title>App — Vayla</title>
-  <meta name="description" content="Vayla app is coming soon to the Apple App Store and Android. Join the waitlist to get notified.">
+  <meta name="description" content="Vayla app is coming soon. Join the waitlist to get notified.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://example.com/app.html">
   <meta name="theme-color" content="#5CB3ED">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="App — Vayla">
-  <meta property="og:description" content="Coming soon to Apple App Store and Android.">
+  <meta property="og:description" content="Coming soon. Join the waitlist to get notified.">
   <meta property="og:image" content="/assets/img/og-cover.png">
   <meta property="og:url" content="https://example.com/app.html">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="App — Vayla">
-  <meta name="twitter:description" content="Coming soon to Apple App Store and Android.">
+  <meta name="twitter:description" content="Coming soon. Join the waitlist to get notified.">
   <meta name="twitter:image" content="/assets/img/og-cover.png">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <!-- Inline critical hero CSS (mirrors home) -->
+  <style>
+    .hero.hero--full { position: relative; min-height: 100svh; padding: 96px 0; display: grid; place-items: center; overflow: hidden; }
+    .hero .hero-card { max-width: 760px; margin: 0 auto; text-align: left; padding: 48px 32px; border-radius: 16px; box-shadow: var(--shadow-lg); }
+    .hero .hero-body { max-width: 760px; margin: 28px 0 0; padding: 0 32px; }
+    .hero .hero-grid { display: grid; grid-template-columns: 3fr 1fr; gap: 24px; align-items: start; }
+    .hero .hero-title-split { max-width: 1040px; margin: 0 auto; padding: 0 32px; display: grid; gap: 12px; grid-auto-flow: column; grid-auto-columns: 1fr; align-items: stretch; }
+    .hero .title-card { border-radius: 16px; padding: 32px 24px; text-align: left; box-shadow: var(--shadow-lg); }
+    .hero .title-word { font-size: clamp(40px, 8vw, 96px); font-weight: 700; margin: 0; letter-spacing: -0.5px; }
+    /* (tilt handled by shared CSS/JS) */
+
+    .hero .actions { display: flex; column-gap: 18px; row-gap: 12px; justify-content: flex-start; align-items: center; flex-wrap: wrap; margin: 28px 0 12px; }
+    .hero-bg { position: absolute; inset: 0; z-index: -1; }
+    .hero-bg .bg-gradient { position: absolute; inset: -10% -10% -20% -10%; background:
+      radial-gradient(900px 500px at 80% 0%, rgba(92,179,237,0.25), rgba(98,141,203,0.10) 40%, transparent 70%),
+      radial-gradient(700px 500px at 10% 10%, rgba(238,94,109,0.10), transparent 60%);
+      filter: saturate(1.1); pointer-events: none; }
+    /* Animated color blobs */
+    .hero-bg .bg-gradient::before,
+    .hero-bg .bg-gradient::after { content: ""; position: absolute; width: 60vw; height: 60vw; max-width: 900px; max-height: 900px; border-radius: 50%; filter: blur(60px) saturate(1.15); opacity: 0.55; will-change: transform, opacity, filter; }
+    .hero-bg .bg-gradient::before { top: -10%; left: 55%; background: radial-gradient(circle at 30% 30%, rgba(92,179,237,0.35), rgba(98,141,203,0.20) 45%, transparent 70%); animation: blobFloatA 16s var(--ease-out) infinite alternate; }
+    .hero-bg .bg-gradient::after { bottom: -10%; left: -10%; background: radial-gradient(circle at 70% 40%, rgba(238,94,109,0.30), rgba(92,179,237,0.12) 40%, transparent 70%); animation: blobFloatB 20s var(--ease-out) infinite alternate; }
+    @keyframes blobFloatA { 0% { transform: translate3d(-6%, 2%, 0) scale(1); filter: blur(60px) saturate(1.1); } 50% { transform: translate3d(3%, -2%, 0) scale(1.04); filter: blur(62px) saturate(1.2); } 100% { transform: translate3d(8%, -6%, 0) scale(1.08); filter: blur(64px) saturate(1.25); } }
+    @keyframes blobFloatB { 0% { transform: translate3d(4%, -2%, 0) scale(1); filter: blur(58px) saturate(1.05); opacity: 0.48; } 50% { transform: translate3d(-2%, 3%, 0) scale(1.05); filter: blur(60px) saturate(1.15); opacity: 0.58; } 100% { transform: translate3d(-6%, 6%, 0) scale(1.1); filter: blur(62px) saturate(1.2); opacity: 0.65; } }
+    .hero-bg .bg-grid { position: absolute; inset: 0; background-image:
+      linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 24px 24px; mask-image: radial-gradient(60% 60% at 50% 30%, black, transparent 70%); }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg .bg-gradient::before, .hero-bg .bg-gradient::after { animation: none !important; }
+    }
+
+    .store-graphic { display: block; max-width: 560px; width: 100%; height: auto; margin: 24px 32px 0; border-radius: 16px; }
+    .store-graphic-inline { display: block; max-width: 360px; width: 60%; height: auto; margin: 12px auto 0; border-radius: 12px; }
+
+    @media (min-width: 961px) { .hero .hero-card { margin: 0; } }
+    @media (max-width: 640px) { .hero.hero--full { padding: 72px 0 40px; } }
+    @media (prefers-reduced-motion: reduce) { .title-card--spin { animation: none !important; } }
+  </style>
+
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header glass" data-theme-surface>
+
+  <header class="site-header" data-theme-surface style="height:64px">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Vayla home">
-        <img src="/assets/logo/vayla_coral_cutout.svg" alt="Vayla" width="36" height="36">
+        <img src="/assets/logo/vayla_blue_cutout.svg" alt="Vayla" width="36" height="36">
       </a>
       <nav id="primary-nav" class="site-nav" role="navigation" aria-label="Primary">
         <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
@@ -36,7 +88,7 @@
           <li class="nav-item has-dropdown">
             <button class="dropdown-toggle underline-slide" aria-haspopup="true" aria-expanded="false">Vayla</button>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="/app.html" aria-current="page" class="underline-slide">Vayla</a></li>
+              <li><a href="/app.html" aria-current="page" class="underline-slide">App</a></li>
               <li><a href="/mission.html" class="underline-slide">Our Mission</a></li>
               <li><a href="/contact.html" class="underline-slide">Contact</a></li>
             </ul>
@@ -51,57 +103,58 @@
     </div>
   </header>
 
-  <main id="main" class="section">
-    <div class="container narrow">
-      <h1>App</h1>
-      <p class="muted">Coming soon to Apple App Store and Android.</p>
-
-      <div class="store-badges" data-reveal="up">
-        <a class="store-badge hover-lift" href="#" aria-label="App Store coming soon" title="App Store (coming soon)">
-          <svg width="160" height="48" viewBox="0 0 160 48" role="img" aria-label="App Store">
-            <rect width="160" height="48" rx="12" fill="#18181B"></rect>
-            <text x="80" y="29" text-anchor="middle" font-family="Inter, system-ui, -apple-system" font-size="14" fill="#FFFFFF">App Store — Soon</text>
-          </svg>
-        </a>
-        <a class="store-badge hover-lift" href="#" aria-label="Google Play coming soon" title="Google Play (coming soon)">
-          <svg width="160" height="48" viewBox="0 0 160 48" role="img" aria-label="Google Play">
-            <rect width="160" height="48" rx="12" fill="#18181B"></rect>
-            <text x="80" y="29" text-anchor="middle" font-family="Inter, system-ui, -apple-system" font-size="14" fill="#FFFFFF">Google Play — Soon</text>
-          </svg>
-        </a>
+  <main id="main">
+    <section class="hero hero--full" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
       </div>
+      <div class="container hero-grid">
+        <div class="hero-col">
+          <div class="hero-title-split" aria-labelledby="hero-title">
+            <div class="hero-card glass glass--frosted title-card tilt-card" data-theme-surface data-reveal="up">
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h1 id="hero-title" class="title-word fade-in-up">Coming Soon...</h1>
+              <img class="store-graphic-inline" src="/assets/resources/app%20store%20icons.svg" alt="App Store and Google Play badges (coming soon)" loading="lazy" width="360" height="59">
+            </div>
+          </div>
+          <div class="hero-body" data-reveal="up">
 
-      <div class="card glass" data-theme-surface data-reveal="up">
-        <h2>Get notified</h2>
-        <form class="form" action="https://formspree.io/f/your-id" method="POST" data-validate novalidate>
-          <div class="form-row">
-            <label for="app-name">Name</label>
-            <input id="app-name" name="name" type="text" autocomplete="name" placeholder="Your name">
+            <div class="actions fade-in-up">
+              <a class="btn btn--glass-mandy btn--xl hover-lift" href="mailto:hello@vayla.example?subject=Vayla%20Waitlist&body=Hi%20Vayla%20team%20%F0%9F%91%8B%0A%0AI%27d%20love%20to%20join%20the%20waitlist!%20%E2%9C%A8%0A%0AName:%20%0AEmail:%20%0AUse%20case:%20%0A%0AThanks!%20%F0%9F%99%8F">Join the waitlist</a>
+            </div>
           </div>
-          <div class="form-row">
-            <label for="app-email">Email</label>
-            <input id="app-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com">
-            <div class="field-hint" aria-live="polite"></div>
-          </div>
-          <div class="form-row">
-            <button class="btn btn--primary" type="submit">Join waitlist</button>
-            <a class="btn btn--secondary" href="mailto:hello@vayla.example?subject=Vayla%20App%20Waitlist">Email us</a>
-          </div>
-          <p class="form-note">We only use your email to reply about Vayla.</p>
-          <div class="form-status" aria-live="polite" role="status"></div>
-        </form>
+        </div>
+        <div class="hero-col" aria-hidden="true"></div>
       </div>
-    </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><div class="brand-inline"><img src="/assets/logo/vayla_blue_filled.svg" alt="" width="24" height="24"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
-      <div><h4>Company</h4><ul><li><a href="/mission.html">Our Mission</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
-      <div><h4>Product</h4><ul><li><a href="/consent.html">Consent-based Sharing</a></li><li><a href="/anti-capture.html">Anti-capture Imaging</a></li><li><a href="/app.html" aria-current="page">App</a></li></ul></div>
-
+      <div>
+        <div class="brand-inline"><img src="/assets/logo/vayla_coral_cutout.svg" alt="" width="24" height="24" aria-hidden="true"><span>Vayla</span></div>
+        <p class="muted">Private sharing that stays under your control.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/mission.html">Our Mission</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/consent.html">Consent-based Sharing</a></li>
+          <li><a href="/anti-capture.html">Anti-capture Imaging</a></li>
+          <li><a href="/app.html" aria-current="page">App</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="container footer-bottom"><p>© <span id="year"></span> Vayla. All rights reserved.</p></div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Vayla. All rights reserved.</p>
+    </div>
   </footer>
 
   <script defer src="/assets/js/main.js"></script>
