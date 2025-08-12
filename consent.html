@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Consent-based Sharing — Vayla</title>
+  <meta name="description" content="A plain-language explainer for consent-based sharing. Set rules, share, and revoke or extend access.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://example.com/consent.html">
+  <meta name="theme-color" content="#5CB3ED">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Consent-based Sharing — Vayla">
+  <meta property="og:description" content="Set rules → Share → Revoke/extend.">
+  <meta property="og:image" content="/assets/img/og-cover.png">
+  <meta property="og:url" content="https://example.com/consent.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Consent-based Sharing — Vayla">
+  <meta name="twitter:description" content="Set rules → Share → Revoke/extend.">
+  <meta name="twitter:image" content="/assets/img/og-cover.png">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header glass" data-theme-surface>
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Vayla home">
+        <img src="/assets/logo/vayla_blue_filled.svg" alt="Vayla" width="28" height="28"><span class="brand-name">Vayla</span>
+      </a>
+      <nav id="primary-nav" class="site-nav" role="navigation" aria-label="Primary">
+        <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+          <span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span>
+        </button>
+        <ul>
+          <li><a href="/app.html" class="underline-slide">App</a></li>
+          <li><a href="/consent.html" aria-current="page" class="underline-slide">Consent-based Sharing</a></li>
+          <li><a href="/anti-capture.html" class="underline-slide">Anti-capture Imaging</a></li>
+          <li class="nav-item has-dropdown">
+            <button class="dropdown-toggle underline-slide" aria-haspopup="true" aria-expanded="false">Company</button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/mission.html" class="underline-slide">Our Mission</a></li>
+              <li><a href="/contact.html" class="underline-slide">Contact</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn--glass-mandy btn--xl hover-lift" href="mailto:hello@vayla.example?subject=Vayla%20Waitlist">Join the waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container narrow">
+      <h1>Consent-based Sharing</h1>
+      <p>Consent-based sharing means you decide how your content can be used before it moves. Vayla makes it simple to set clear expectations and keep control as things change.</p>
+      <ul class="list">
+        <li>Pick who can access and for how long.</li>
+        <li>Prevent or degrade captures to reduce unwanted spread.</li>
+        <li>Track access events so you know what happened and when.</li>
+      </ul>
+
+      <div class="card glass" data-theme-surface data-reveal="up" aria-label="3-step diagram">
+        <h2>How it works</h2>
+        <div class="diagram">
+          <svg viewBox="0 0 820 180" width="100%" height="180" role="img" aria-label="Set rules → Share → Revoke or extend">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#5CB3ED"/><stop offset="100%" stop-color="#628DCB"/>
+              </linearGradient>
+            </defs>
+            <!-- Step 1 -->
+            <g transform="translate(20,30)">
+              <rect width="240" height="120" rx="14" fill="url(#g1)" opacity="0.12" stroke="#E4E4E7"/>
+              <g transform="translate(16,18)" fill="none" stroke="#3A5688" stroke-width="1.5">
+                <rect x="0" y="0" width="72" height="52" rx="8"></rect>
+                <path d="M90 10h50M90 26h80M90 42h64"></path>
+                <circle cx="208" cy="26" r="8"></circle>
+                <path d="M200 50h16"></path>
+              </g>
+              <text x="16" y="102" font-family="Inter, system-ui" font-size="14" fill="#18181B">1) Set rules</text>
+            </g>
+            <!-- Arrow -->
+            <g transform="translate(280,90)">
+              <path d="M0 0h60" stroke="#A1A1AA" stroke-width="1.5" />
+              <path d="M60 -6l12 6-12 6" fill="#A1A1AA"/>
+            </g>
+            <!-- Step 2 -->
+            <g transform="translate(360,30)">
+              <rect width="240" height="120" rx="14" fill="url(#g1)" opacity="0.12" stroke="#E4E4E7"/>
+              <g transform="translate(16,18)" fill="none" stroke="#3A5688" stroke-width="1.5">
+                <path d="M10 38h110M10 38c0-20 30-20 30 0s30 20 30 0 30-20 30 0M140 20h60M140 44h80"></path>
+              </g>
+              <text x="16" y="102" font-family="Inter, system-ui" font-size="14" fill="#18181B">2) Share</text>
+            </g>
+            <!-- Arrow -->
+            <g transform="translate(620,90)">
+              <path d="M0 0h60" stroke="#A1A1AA" stroke-width="1.5" />
+              <path d="M60 -6l12 6-12 6" fill="#A1A1AA"/>
+            </g>
+            <!-- Step 3 -->
+            <g transform="translate(700,30)">
+              <rect width="100" height="120" rx="14" fill="url(#g1)" opacity="0.12" stroke="#E4E4E7"/>
+              <g transform="translate(16,18)" fill="none" stroke="#3A5688" stroke-width="1.5">
+                <path d="M10 10h48M10 26h48M10 42h48"></path>
+                <path d="M10 64h24" stroke="#EE5E6D" stroke-width="2"></path>
+              </g>
+              <text x="-6" y="102" font-family="Inter, system-ui" font-size="14" fill="#18181B">3) Revoke/extend</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="accordion" id="consent-faq" data-reveal="up">
+        <h2>FAQs</h2>
+        <div class="accordion-item">
+          <h3>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="p1" id="t1">
+              What happens when I revoke access?
+            </button>
+          </h3>
+          <div id="p1" class="accordion-panel" role="region" aria-labelledby="t1" hidden>
+            <p>Recipients immediately lose access. Links stop working and cached sessions are invalidated.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="p2" id="t2">
+              Can I change rules after sharing?
+            </button>
+          </h3>
+          <div id="p2" class="accordion-panel" role="region" aria-labelledby="t2" hidden>
+            <p>Yes. You can extend, tighten, or update rules, and changes apply to existing recipients.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><div class="brand-inline"><img src="/assets/logo/vayla_blue_filled.svg" alt="" width="24" height="24"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
+      <div><h4>Company</h4><ul><li><a href="/mission.html">Our Mission</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+      <div><h4>Product</h4><ul><li><a href="/consent.html" aria-current="page">Consent-based Sharing</a></li><li><a href="/anti-capture.html">Anti-capture Imaging</a></li><li><a href="/app.html">App</a></li></ul></div>
+
+    </div>
+    <div class="container footer-bottom"><p>© <span id="year"></span> Vayla. All rights reserved.</p></div>
+  </footer>
+
+  <script defer src="/assets/js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,10 @@
+<svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vayla">
+  <defs>
+    <linearGradient id="v" x1="6" y1="6" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5CB3ED"/>
+      <stop offset="1" stop-color="#628DCB"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#v)" opacity="0.2"/>
+  <path d="M10 14l8 20h4l6-14 6 14h4L34 14h-4l-6 14-6-14h-4z" fill="#3A5688"/>
+</svg> 

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Anti-capture Imaging — Vayla</title>
+  <meta name="description" content="A non-technical overview of Vayla’s anti-capture imaging: resists screenshots and recordings, degrades camera captures, and emits audit events.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://example.com/anti-capture.html">
+  <meta name="theme-color" content="#5CB3ED">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Anti-capture Imaging — Vayla">
+  <meta property="og:description" content="Resists screenshots and recordings, degrades camera captures, and emits audit events.">
+  <meta property="og:image" content="/assets/img/og-cover.png">
+  <meta property="og:url" content="https://example.com/anti-capture.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Anti-capture Imaging — Vayla">
+  <meta name="twitter:description" content="Resists screenshots and recordings, degrades camera captures, and emits audit events.">
+  <meta name="twitter:image" content="/assets/img/og-cover.png">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header glass" data-theme-surface>
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Vayla home">
+        <img src="/assets/logo/vayla_blue_filled.svg" alt="Vayla" width="28" height="28"><span class="brand-name">Vayla</span>
+      </a>
+      <nav id="primary-nav" class="site-nav" role="navigation" aria-label="Primary">
+        <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+          <span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span>
+        </button>
+        <ul>
+          <li><a href="/app.html" class="underline-slide">App</a></li>
+          <li><a href="/consent.html" class="underline-slide">Consent-based Sharing</a></li>
+          <li><a href="/anti-capture.html" aria-current="page" class="underline-slide">Anti-capture Imaging</a></li>
+          <li class="nav-item has-dropdown">
+            <button class="dropdown-toggle underline-slide" aria-haspopup="true" aria-expanded="false">Company</button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/mission.html" class="underline-slide">Our Mission</a></li>
+              <li><a href="/contact.html" class="underline-slide">Contact</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn--glass-mandy btn--xl hover-lift" href="mailto:hello@vayla.example?subject=Vayla%20Waitlist">Join the waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container narrow">
+      <h1>Anti-capture Imaging</h1>
+      <p>Vayla’s viewer reduces the value of screenshots and recordings and makes misuse more visible. It’s not about perfect prevention—it’s about meaningful friction, clear expectations, and accountability.</p>
+
+      <div class="grid grid--3" data-reveal="up">
+        <article class="card glass">
+          <h3 class="with-icon">
+            <span class="icon" aria-hidden="true">
+              <!-- Shield -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+            </span>
+            Resists screenshots
+          </h3>
+          <p>Session-aware overlays, dynamic elements, and rendering techniques that reduce capture quality.</p>
+        </article>
+        <article class="card glass">
+          <h3 class="with-icon">
+            <span class="icon" aria-hidden="true">
+              <!-- Eye-off -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              </svg>
+            </span>
+            Camera-capture degradation
+          </h3>
+          <p>Visual treatments that reduce clarity when viewed through a secondary device’s camera.</p>
+        </article>
+        <article class="card glass">
+          <h3 class="with-icon">
+            <span class="icon" aria-hidden="true">
+              <!-- Key -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="8" cy="8" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M11 11l7 7M18 18h3v-3" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </span>
+            Audit events
+          </h3>
+          <p>When attempts occur, you get visibility—making expectations explicit and misuse riskier.</p>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><div class="brand-inline"><img src="/assets/logo/vayla_blue_filled.svg" alt="" width="24" height="24"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
+      <div><h4>Company</h4><ul><li><a href="/mission.html">Our Mission</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+      <div><h4>Product</h4><ul><li><a href="/consent.html">Consent-based Sharing</a></li><li><a href="/anti-capture.html" aria-current="page">Anti-capture Imaging</a></li><li><a href="/app.html">App</a></li></ul></div>
+
+    </div>
+    <div class="container footer-bottom"><p>© <span id="year"></span> Vayla. All rights reserved.</p></div>
+  </footer>
+
+  <script defer src="/assets/js/main.js"></script>
+</body>
+</html> 

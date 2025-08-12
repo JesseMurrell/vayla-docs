@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>App — Vayla</title>
+  <meta name="description" content="Vayla app is coming soon to the Apple App Store and Android. Join the waitlist to get notified.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://example.com/app.html">
+  <meta name="theme-color" content="#5CB3ED">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="App — Vayla">
+  <meta property="og:description" content="Coming soon to Apple App Store and Android.">
+  <meta property="og:image" content="/assets/img/og-cover.png">
+  <meta property="og:url" content="https://example.com/app.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="App — Vayla">
+  <meta name="twitter:description" content="Coming soon to Apple App Store and Android.">
+  <meta name="twitter:image" content="/assets/img/og-cover.png">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header glass" data-theme-surface>
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Vayla home">
+        <img src="/assets/logo/vayla_blue_filled.svg" alt="Vayla" width="28" height="28"><span class="brand-name">Vayla</span>
+      </a>
+      <nav id="primary-nav" class="site-nav" role="navigation" aria-label="Primary">
+        <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+          <span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span>
+        </button>
+        <ul>
+          <li><a href="/app.html" aria-current="page" class="underline-slide">App</a></li>
+          <li><a href="/consent.html" class="underline-slide">Consent-based Sharing</a></li>
+          <li><a href="/anti-capture.html" class="underline-slide">Anti-capture Imaging</a></li>
+          <li class="nav-item has-dropdown">
+            <button class="dropdown-toggle underline-slide" aria-haspopup="true" aria-expanded="false">Company</button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/mission.html" class="underline-slide">Our Mission</a></li>
+              <li><a href="/contact.html" class="underline-slide">Contact</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn--glass-mandy btn--xl hover-lift" href="mailto:hello@vayla.example?subject=Vayla%20Waitlist">Join the waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container narrow">
+      <h1>App</h1>
+      <p class="muted">Coming soon to Apple App Store and Android.</p>
+
+      <div class="store-badges" data-reveal="up">
+        <a class="store-badge hover-lift" href="#" aria-label="App Store coming soon" title="App Store (coming soon)">
+          <svg width="160" height="48" viewBox="0 0 160 48" role="img" aria-label="App Store">
+            <rect width="160" height="48" rx="12" fill="#18181B"></rect>
+            <text x="80" y="29" text-anchor="middle" font-family="Inter, system-ui, -apple-system" font-size="14" fill="#FFFFFF">App Store — Soon</text>
+          </svg>
+        </a>
+        <a class="store-badge hover-lift" href="#" aria-label="Google Play coming soon" title="Google Play (coming soon)">
+          <svg width="160" height="48" viewBox="0 0 160 48" role="img" aria-label="Google Play">
+            <rect width="160" height="48" rx="12" fill="#18181B"></rect>
+            <text x="80" y="29" text-anchor="middle" font-family="Inter, system-ui, -apple-system" font-size="14" fill="#FFFFFF">Google Play — Soon</text>
+          </svg>
+        </a>
+      </div>
+
+      <div class="card glass" data-theme-surface data-reveal="up">
+        <h2>Get notified</h2>
+        <form class="form" action="https://formspree.io/f/your-id" method="POST" data-validate novalidate>
+          <div class="form-row">
+            <label for="app-name">Name</label>
+            <input id="app-name" name="name" type="text" autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="form-row">
+            <label for="app-email">Email</label>
+            <input id="app-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com">
+            <div class="field-hint" aria-live="polite"></div>
+          </div>
+          <div class="form-row">
+            <button class="btn btn--primary" type="submit">Join waitlist</button>
+            <a class="btn btn--secondary" href="mailto:hello@vayla.example?subject=Vayla%20App%20Waitlist">Email us</a>
+          </div>
+          <p class="form-note">We only use your email to reply about Vayla.</p>
+          <div class="form-status" aria-live="polite" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><div class="brand-inline"><img src="/assets/logo/vayla_blue_filled.svg" alt="" width="24" height="24"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
+      <div><h4>Company</h4><ul><li><a href="/mission.html">Our Mission</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+      <div><h4>Product</h4><ul><li><a href="/consent.html">Consent-based Sharing</a></li><li><a href="/anti-capture.html">Anti-capture Imaging</a></li><li><a href="/app.html" aria-current="page">App</a></li></ul></div>
+
+    </div>
+    <div class="container footer-bottom"><p>© <span id="year"></span> Vayla. All rights reserved.</p></div>
+  </footer>
+
+  <script defer src="/assets/js/main.js"></script>
+</body>
+</html> 
