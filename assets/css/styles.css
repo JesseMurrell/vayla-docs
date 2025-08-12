@@ -106,13 +106,17 @@ h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: 0.2px; }
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: inherit; justify-self: start; }
 .brand .brand-name { font-weight: 600; letter-spacing: 0.2px; }
-.site-nav { justify-self: end; }
+.site-nav { justify-self: end; font-weight: 600; font-family: var(--font-heading); letter-spacing: 0.2px; }
 .header-cta { justify-self: end; }
 
 /* Header link colors override to black */
 .site-header a { color: var(--black); }
 .site-header a:hover, .site-header a:focus { color: var(--black); }
 .site-header .site-nav a[aria-current="page"] { color: var(--black); }
+/* Preserve button text colors in header */
+.site-header a.btn--glass-mandy,
+.site-header a.btn--glass-mandy:hover,
+.site-header a.btn--glass-mandy:focus { color: var(--white); }
 
 .menu-toggle {
   display: none; position: relative; width: 40px; height: 40px; border-radius: 10px;
@@ -328,7 +332,7 @@ input:focus-visible, textarea:focus-visible {
 .hover-lift:hover, .hover-lift:focus { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
 /* 3D Tilt */
-.tilt-card { position: relative; will-change: transform; transform: perspective(800px) rotateX(0) rotateY(0); transition: transform var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out); }
+.tilt-card { position: relative; will-change: transform; transform: perspective(800px) rotateX(0) rotateY(0); transition: transform 100ms var(--ease-out), box-shadow 100ms var(--ease-out); }
 .tilt-card:hover, .tilt-card:focus-within, .tilt-card.is-idle-tilting { box-shadow: 0 14px 36px rgba(0,0,0,0.16); }
 .tilt-card .tilt-glare { pointer-events: none; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(200px 120px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255,255,255,0.35), transparent 60%); opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); mix-blend-mode: screen; }
 .tilt-card.is-tilting .tilt-glare { opacity: 0.5; }

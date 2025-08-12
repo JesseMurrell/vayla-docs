@@ -229,8 +229,8 @@
         function idleLoop(now) {
           if (card.__userActive) return; // pause idle while user active
           const t = (now - idleStart) / 1000; // seconds
-          const idleX = Math.sin(t * 0.6) * 6; // deg
-          const idleY = Math.cos(t * 0.8) * 6; // deg
+                  const idleX = Math.sin(t * 1) * 6; // deg
+        const idleY = Math.cos(t * 2) * 6; // deg
           card.style.transform = `perspective(800px) rotateX(${idleX}deg) rotateY(${idleY}deg)`;
           card.classList.add('is-idle-tilting');
           requestAnimationFrame(idleLoop);
