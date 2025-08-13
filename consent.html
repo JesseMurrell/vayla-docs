@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-allow-motion="true">
 <head>
   <meta charset="utf-8">
   <title>Consent-based Sharing — Vayla</title>
@@ -16,17 +16,141 @@
   <meta name="twitter:title" content="Consent-based Sharing — Vayla">
   <meta name="twitter:description" content="Set rules → Share → Revoke/extend.">
   <meta name="twitter:image" content="/assets/img/og-cover.png">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <!-- Inline hero + carousel styles (match home/app) -->
+  <style>
+    /* Add spacing between nav and content */
+    body {
+      /* Ensure background covers the whole screen, even with extra spacing */
+      min-height: 100vh;
+      position: relative;
+    }
+    .hero {
+      position: relative;
+      /* Add extra top padding to push content down */
+      padding: 128px 0 56px;
+      overflow: hidden;
+      min-height: 100vh; /* Ensure background covers the whole screen */
+      box-sizing: border-box;
+      display: flex;
+      align-items: flex-start;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      margin: 0 0 12px;
+    }
+    .hero p.subhead {
+      max-width: 760px;
+      margin: 0;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .hero-bg .bg-gradient {
+      position: absolute;
+      inset: -10% -10% -20% -10%;
+      width: 120%;
+      height: 120%;
+      background:
+        radial-gradient(900px 500px at 80% 0%, rgba(92,179,237,0.25), rgba(98,141,203,0.10) 40%, transparent 70%),
+        radial-gradient(700px 500px at 10% 10%, rgba(238,94,109,0.10), transparent 60%);
+      filter: saturate(1.1);
+      pointer-events: none;
+    }
+    .hero-bg .bg-gradient::before,
+    .hero-bg .bg-gradient::after {
+      content: "";
+      position: absolute;
+      width: 60vw;
+      height: 60vw;
+      max-width: 900px;
+      max-height: 900px;
+      border-radius: 50%;
+      filter: blur(60px) saturate(1.15);
+      opacity: 0.55;
+      will-change: transform, opacity, filter;
+    }
+    .hero-bg .bg-gradient::before {
+      top: -10%;
+      left: 55%;
+      background: radial-gradient(circle at 30% 30%, rgba(92,179,237,0.35), rgba(98,141,203,0.20) 45%, transparent 70%);
+      animation: blobFloatA 16s var(--ease-out) infinite alternate;
+    }
+    .hero { position: relative; padding: 96px 0 56px; overflow: hidden; }
+    .hero .container { position: relative; z-index: 1; }
+    .hero h1 { font-size: clamp(36px, 6vw, 64px); margin: 0 0 12px; }
+    .hero p.subhead { max-width: 760px; margin: 0; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg .bg-gradient { position: absolute; inset: -10% -10% -20% -10%; background:
+      radial-gradient(900px 500px at 80% 0%, rgba(92,179,237,0.25), rgba(98,141,203,0.10) 40%, transparent 70%),
+      radial-gradient(700px 500px at 10% 10%, rgba(238,94,109,0.10), transparent 60%);
+      filter: saturate(1.1); pointer-events: none; }
+    .hero-bg .bg-gradient::before,
+    .hero-bg .bg-gradient::after { content: ""; position: absolute; width: 60vw; height: 60vw; max-width: 900px; max-height: 900px; border-radius: 50%; filter: blur(60px) saturate(1.15); opacity: 0.55; will-change: transform, opacity, filter; }
+    .hero-bg .bg-gradient::before { top: -10%; left: 55%; background: radial-gradient(circle at 30% 30%, rgba(92,179,237,0.35), rgba(98,141,203,0.20) 45%, transparent 70%); animation: blobFloatA 16s var(--ease-out) infinite alternate; }
+    .hero-bg .bg-gradient::after { bottom: -10%; left: -10%; background: radial-gradient(circle at 70% 40%, rgba(238,94,109,0.30), rgba(92,179,237,0.12) 40%, transparent 70%); animation: blobFloatB 20s var(--ease-out) infinite alternate; }
+    @keyframes blobFloatA { 0% { transform: translate3d(-6%, 2%, 0) scale(1); filter: blur(60px) saturate(1.1); } 50% { transform: translate3d(3%, -2%, 0) scale(1.04); filter: blur(62px) saturate(1.2); } 100% { transform: translate3d(8%, -6%, 0) scale(1.08); filter: blur(64px) saturate(1.25); } }
+    @keyframes blobFloatB { 0% { transform: translate3d(4%, -2%, 0) scale(1); filter: blur(58px) saturate(1.05); opacity: 0.48; } 50% { transform: translate3d(-2%, 3%, 0) scale(1.05); filter: blur(60px) saturate(1.15); opacity: 0.58; } 100% { transform: translate3d(-6%, 6%, 0) scale(1.1); filter: blur(62px) saturate(1.2); opacity: 0.65; } }
+    .hero-bg .bg-grid { position: absolute; inset: 0; background-image:
+      linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 24px 24px; mask-image: radial-gradient(60% 60% at 50% 30%, black, transparent 70%); }
+    @media (prefers-reduced-motion: reduce) { .hero-bg .bg-gradient::before, .hero-bg .bg-gradient::after { animation: none !important; } }
+
+    /* Carousel */
+    .bleed { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; }
+    .carousel { position: relative; margin-top: 24px; padding-inline: 20px; }
+    @media (min-width: 960px) {
+      .carousel-track { grid-auto-columns: calc(33.333vw - 40px); }
+    }
+    .carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(320px, 80%); gap: 32px; overflow-x: auto; padding: 8px 4px 12px; scroll-snap-type: x mandatory; scroll-snap-stop: always; scroll-padding-inline: 24px; -webkit-overflow-scrolling: touch; }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-slide { scroll-snap-align: start; aspect-ratio: 4 / 3; }
+    .carousel .controls { display: flex; gap: 8px; justify-content: flex-end; margin: 10px 4px 0; }
+    .carousel .controls .btn { padding: 8px 12px; }
+
+    /* Tighten and elevate How it works */
+    .section--tight { padding-top: 24px; }
+    .how-card { margin: 24px 0 8px; }
+    .how-svg { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.06)); }
+    @keyframes dash { to { stroke-dashoffset: 0; } }
+
+    /* Add space between How it works and carousel */
+    .how-works-spacer {
+      height: 40px;
+    }
+    @media (max-width: 600px) {
+      .how-works-spacer {
+        height: 24px;
+      }
+    }
+  </style>
+
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header glass" data-theme-surface>
+  <header class="site-header" data-theme-surface style="height:64px">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Vayla home">
-        <img src="/assets/logo/vayla_coral_cutout.svg" alt="Vayla" width="36" height="36">
+        <img src="/assets/logo/vayla_blue_cutout.svg" alt="Vayla" width="36" height="36">
       </a>
       <nav id="primary-nav" class="site-nav" role="navigation" aria-label="Primary">
         <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
@@ -51,100 +175,152 @@
     </div>
   </header>
 
-  <main id="main" class="section">
-    <div class="container narrow">
-      <h1>Consent-based Sharing</h1>
-      <p>Consent-based sharing means you decide how your content can be used before it moves. Vayla makes it simple to set clear expectations and keep control as things change.</p>
-      <ul class="list">
-        <li>Pick who can access and for how long.</li>
-        <li>Prevent or degrade captures to reduce unwanted spread.</li>
-        <li>Track access events so you know what happened and when.</li>
-      </ul>
-
-      <div class="card glass" data-theme-surface data-reveal="up" aria-label="3-step diagram">
-        <h2>How it works</h2>
-        <div class="diagram">
-          <svg viewBox="0 0 820 180" width="100%" height="180" role="img" aria-label="Set rules → Share → Revoke or extend">
-            <defs>
-              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#5CB3ED"/><stop offset="100%" stop-color="#628DCB"/>
-              </linearGradient>
-            </defs>
-            <!-- Step 1 -->
-            <g transform="translate(20,30)">
-              <rect width="240" height="120" rx="14" fill="url(#g1)" opacity="0.12" stroke="#E4E4E7"/>
-              <g transform="translate(16,18)" fill="none" stroke="#3A5688" stroke-width="1.5">
-                <rect x="0" y="0" width="72" height="52" rx="8"></rect>
-                <path d="M90 10h50M90 26h80M90 42h64"></path>
-                <circle cx="208" cy="26" r="8"></circle>
-                <path d="M200 50h16"></path>
-              </g>
-              <text x="16" y="102" font-family="Inter, system-ui" font-size="14" fill="#18181B">1) Set rules</text>
-            </g>
-            <!-- Arrow -->
-            <g transform="translate(280,90)">
-              <path d="M0 0h60" stroke="#A1A1AA" stroke-width="1.5" />
-              <path d="M60 -6l12 6-12 6" fill="#A1A1AA"/>
-            </g>
-            <!-- Step 2 -->
-            <g transform="translate(360,30)">
-              <rect width="240" height="120" rx="14" fill="url(#g1)" opacity="0.12" stroke="#E4E4E7"/>
-              <g transform="translate(16,18)" fill="none" stroke="#3A5688" stroke-width="1.5">
-                <path d="M10 38h110M10 38c0-20 30-20 30 0s30 20 30 0 30-20 30 0M140 20h60M140 44h80"></path>
-              </g>
-              <text x="16" y="102" font-family="Inter, system-ui" font-size="14" fill="#18181B">2) Share</text>
-            </g>
-            <!-- Arrow -->
-            <g transform="translate(620,90)">
-              <path d="M0 0h60" stroke="#A1A1AA" stroke-width="1.5" />
-              <path d="M60 -6l12 6-12 6" fill="#A1A1AA"/>
-            </g>
-            <!-- Step 3 -->
-            <g transform="translate(700,30)">
-              <rect width="100" height="120" rx="14" fill="url(#g1)" opacity="0.12" stroke="#E4E4E7"/>
-              <g transform="translate(16,18)" fill="none" stroke="#3A5688" stroke-width="1.5">
-                <path d="M10 10h48M10 26h48M10 42h48"></path>
-                <path d="M10 64h24" stroke="#EE5E6D" stroke-width="2"></path>
-              </g>
-              <text x="-6" y="102" font-family="Inter, system-ui" font-size="14" fill="#18181B">3) Revoke/extend</text>
-            </g>
-          </svg>
-        </div>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
       </div>
+      <div class="container">
+        <h1 id="hero-title">Consent-based Sharing</h1>
+        <p class="subhead muted">Set simple rules for who can access and for how long. Share with confidence, adjust later, and keep control when things change.</p>
 
-      <div class="accordion" id="consent-faq" data-reveal="up">
-        <h2>FAQs</h2>
-        <div class="accordion-item">
-          <h3>
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="p1" id="t1">
-              What happens when I revoke access?
-            </button>
-          </h3>
-          <div id="p1" class="accordion-panel" role="region" aria-labelledby="t1" hidden>
-            <p>Recipients immediately lose access. Links stop working and cached sessions are invalidated.</p>
+        <!-- How it works section moved above the carousel -->
+        <div class="narrow">
+          <div class="card glass how-card" data-theme-surface data-reveal="up" aria-label="3-step diagram">
+            <h2>How it works</h2>
+            <div class="diagram">
+              <svg class="how-svg" viewBox="0 0 900 200" width="100%" height="200" role="img" aria-label="1) Set rules → 2) Share → 3) Revoke or extend">
+                <defs>
+                  <linearGradient id="stepBg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#628DCB"/>
+                    <stop offset="100%" stop-color="#5CB3ED"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(20,24)">
+                  <rect width="260" height="140" rx="16" fill="url(#stepBg)" opacity="0.10" stroke="#E4E4E7"/>
+                  <circle cx="20" cy="-6" r="14" fill="#628DCB"/>
+                  <text x="20" y="-2" font-family="Ubuntu, system-ui" font-size="12" fill="#FFFFFF" text-anchor="middle">1</text>
+                  <g transform="translate(20,34)" fill="none" stroke="#3A5688" stroke-width="1.5">
+                    <rect x="0" y="0" width="80" height="56" rx="8"></rect>
+                    <path d="M100 8h60M100 28h96M100 48h76"></path>
+                  </g>
+                  <text x="20" y="130" font-family="Inter, system-ui" font-size="14" fill="#18181B">Set rules</text>
+                </g>
+                <g transform="translate(300,98)">
+                  <path d="M0 0h80" stroke="#A1A1AA" stroke-width="2" stroke-dasharray="6 6" stroke-dashoffset="60">
+                    <animate attributeName="stroke-dashoffset" from="60" to="0" dur="2s" repeatCount="indefinite" />
+                  </path>
+                  <path d="M80 -8l14 8-14 8" fill="#A1A1AA"/>
+                </g>
+                <g transform="translate(380,24)">
+                  <rect width="260" height="140" rx="16" fill="url(#stepBg)" opacity="0.10" stroke="#E4E4E7"/>
+                  <circle cx="20" cy="-6" r="14" fill="#628DCB"/>
+                  <text x="20" y="-2" font-family="Ubuntu, system-ui" font-size="12" fill="#FFFFFF" text-anchor="middle">2</text>
+                  <g transform="translate(20,34)" fill="none" stroke="#3A5688" stroke-width="1.5">
+                    <path d="M10 40h120M10 40c0-20 30-20 30 0s30 20 30 0 30-20 30 0"/>
+                    <path d="M150 18h72M150 46h90"/>
+                  </g>
+                  <text x="20" y="130" font-family="Inter, system-ui" font-size="14" fill="#18181B">Share</text>
+                </g>
+                <g transform="translate(660,98)">
+                  <path d="M0 0h80" stroke="#A1A1AA" stroke-width="2" stroke-dasharray="6 6" stroke-dashoffset="60">
+                    <animate attributeName="stroke-dashoffset" from="60" to="0" dur="2s" repeatCount="indefinite" />
+                  </path>
+                  <path d="M80 -8l14 8-14 8" fill="#A1A1AA"/>
+                </g>
+                <g transform="translate(740,24)">
+                  <rect width="140" height="140" rx="16" fill="url(#stepBg)" opacity="0.10" stroke="#E4E4E7"/>
+                  <circle cx="20" cy="-6" r="14" fill="#628DCB"/>
+                  <text x="20" y="-2" font-family="Ubuntu, system-ui" font-size="12" fill="#FFFFFF" text-anchor="middle">3</text>
+                  <g transform="translate(18,34)" fill="none" stroke="#3A5688" stroke-width="1.5">
+                    <path d="M0 12h88M0 34h88M0 56h88"/>
+                    <path d="M0 80h36" stroke="#EE5E6D" stroke-width="2"/>
+                  </g>
+                  <text x="-6" y="130" font-family="Inter, system-ui" font-size="14" fill="#18181B">Revoke/extend</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="narrow">
+            <p>Consent-based sharing means you decide how your content can be used before it moves. Vayla makes it simple to set clear expectations and keep control as things change.</p>
+            <ul class="list">
+              <li>Pick who can access and for how long.</li>
+              <li>Prevent or degrade captures to reduce unwanted spread.</li>
+              <li>Track access events so you know what happened and when.</li>
+            </ul>
           </div>
         </div>
-        <div class="accordion-item">
-          <h3>
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="p2" id="t2">
-              Can I change rules after sharing?
-            </button>
-          </h3>
-          <div id="p2" class="accordion-panel" role="region" aria-labelledby="t2" hidden>
-            <p>Yes. You can extend, tighten, or update rules, and changes apply to existing recipients.</p>
+
+        <div class="how-works-spacer"></div>
+
+        <div class="carousel bleed" data-carousel>
+          <div class="carousel-track" role="region" aria-label="Key features" tabindex="0" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>Consent rules</h3>
+              <p>Decide who can view, for how long, and what they can do.</p>
+            </article>
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>Anti-capture</h3>
+              <p>Techniques that resist screenshots and reduce camera capture value.</p>
+            </article>
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>Invisible watermarking</h3>
+              <p>Trace misuse without exposing your content.</p>
+            </article>
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>E2E encryption</h3>
+              <p>Strong protection from sender to viewer.</p>
+            </article>
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>Audit trail</h3>
+              <p>See who accessed, when, and what changed.</p>
+            </article>
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
+    <section class="section section--tight">
+      <div class="container narrow">
+        <div class="accordion" id="consent-faq" data-reveal="up">
+          <h2>FAQs</h2>
+          <div class="accordion-item">
+            <h3>
+              <button class="accordion-trigger" aria-expanded="false" aria-controls="p1" id="t1">
+                What happens when I revoke access?
+              </button>
+            </h3>
+            <div id="p1" class="accordion-panel" role="region" aria-labelledby="t1" hidden>
+              <p>Recipients immediately lose access. Links stop working and cached sessions are invalidated.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3>
+              <button class="accordion-trigger" aria-expanded="false" aria-controls="p2" id="t2">
+                Can I change rules after sharing?
+              </button>
+            </h3>
+            <div id="p2" class="accordion-panel" role="region" aria-labelledby="t2" hidden>
+              <p>Yes. You can extend, tighten, or update rules, and changes apply to existing recipients.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><div class="brand-inline"><img src="/assets/logo/vayla_blue_filled.svg" alt="" width="24" height="24"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
+      <div><div class="brand-inline"><img src="/assets/logo/vayla_coral_cutout.svg" alt="" width="24" height="24" aria-hidden="true"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
       <div><h4>Company</h4><ul><li><a href="/mission.html">Our Mission</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
       <div><h4>Product</h4><ul><li><a href="/consent.html" aria-current="page">Consent-based Sharing</a></li><li><a href="/anti-capture.html">Anti-capture Imaging</a></li><li><a href="/app.html">App</a></li></ul></div>
-
     </div>
     <div class="container footer-bottom"><p>© <span id="year"></span> Vayla. All rights reserved.</p></div>
   </footer>

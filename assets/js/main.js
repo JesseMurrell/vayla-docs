@@ -150,10 +150,10 @@
     });
   });
 
-  // Footer year
+    // Footer year
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
+ 
   // Dropdown menus (for Company)
   const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
   function closeAllDropdowns() { dropdownToggles.forEach((btn) => btn.setAttribute('aria-expanded', 'false')); }
@@ -175,7 +175,7 @@
     });
     document.addEventListener('click', (e) => { if (!e.target.closest('.has-dropdown')) closeAllDropdowns(); });
   }
-
+ 
   // 3D Tilt + idle animation
   const allowMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.hasAttribute('data-allow-motion');
   if (allowMotion) {
@@ -185,7 +185,7 @@
         const rect = () => card.getBoundingClientRect();
         let rafId = null;
         card.__userActive = false;
-
+ 
         function setTransform(x, y) {
           const r = rect();
           const cx = x - r.left;
@@ -199,13 +199,13 @@
           card.style.setProperty('--glare-x', `${(px + 0.5) * 100}%`);
           card.style.setProperty('--glare-y', `${(py + 0.5) * 100}%`);
         }
-
+ 
         function reset() {
           card.classList.remove('is-tilting');
           card.classList.remove('is-idle-tilting');
           card.__userActive = false;
         }
-
+ 
         function onMove(e) {
           const p = e.touches ? e.touches[0] : e;
           if (!rafId) {
@@ -215,7 +215,7 @@
             });
           }
         }
-
+ 
         // User interaction
         card.addEventListener('pointerenter', () => { card.classList.add('is-tilting'); card.__userActive = true; });
         card.addEventListener('pointermove', (e) => { card.__userActive = true; onMove(e); });
@@ -223,14 +223,14 @@
         card.addEventListener('touchstart', (e) => { card.classList.add('is-tilting'); card.__userActive = true; onMove(e); }, { passive: true });
         card.addEventListener('touchmove', (e) => { card.__userActive = true; onMove(e); }, { passive: true });
         card.addEventListener('touchend', reset);
-
+ 
         // Idle tilt animation
         let idleStart = performance.now();
         function idleLoop(now) {
           if (card.__userActive) return; // pause idle while user active
           const t = (now - idleStart) / 1000; // seconds
-                  const idleX = Math.sin(t * 1) * 6; // deg
-        const idleY = Math.cos(t * 2) * 6; // deg
+                   const idleX = Math.sin(t * 1) * 6; // deg
+         const idleY = Math.cos(t * 2) * 6; // deg
           card.style.transform = `perspective(800px) rotateX(${idleX}deg) rotateY(${idleY}deg)`;
           card.classList.add('is-idle-tilting');
           requestAnimationFrame(idleLoop);
@@ -239,4 +239,15 @@
       });
     }
   }
+ 
+  // Carousel controls
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.carousel-track');
+    const prev = carousel.querySelector('[data-carousel-prev]');
+    const next = carousel.querySelector('[data-carousel-next]');
+    if (!track || !prev || !next) return;
+    const slideWidth = () => track.querySelector('.carousel-slide')?.getBoundingClientRect().width || 320;
+    prev.addEventListener('click', () => { track.scrollBy({ left: -slideWidth() - 14, behavior: 'smooth' }); });
+    next.addEventListener('click', () => { track.scrollBy({ left: slideWidth() + 14, behavior: 'smooth' }); });
+  });
 })(); 
