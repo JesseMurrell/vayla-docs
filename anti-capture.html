@@ -1,32 +1,181 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-allow-motion="true">
 <head>
   <meta charset="utf-8">
-  <title>Anti-capture Imaging — Vayla</title>
+  <title>Anti-capture Imaging - Vayla</title>
   <meta name="description" content="A non-technical overview of Vayla’s anti-capture imaging: resists screenshots and recordings, degrades camera captures, and emits audit events.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://example.com/anti-capture.html">
   <meta name="theme-color" content="#5CB3ED">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Anti-capture Imaging — Vayla">
+  <meta property="og:title" content="Anti-capture Imaging - Vayla">
   <meta property="og:description" content="Resists screenshots and recordings, degrades camera captures, and emits audit events.">
   <meta property="og:image" content="/assets/img/og-cover.png">
   <meta property="og:url" content="https://example.com/anti-capture.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Anti-capture Imaging — Vayla">
+  <meta name="twitter:title" content="Anti-capture Imaging - Vayla">
   <meta name="twitter:description" content="Resists screenshots and recordings, degrades camera captures, and emits audit events.">
   <meta name="twitter:image" content="/assets/img/og-cover.png">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <!-- Inline hero + carousel styles (match home/app) -->
+  <style>
+    /* Add spacing between nav and content */
+    body {
+      /* Ensure background covers the whole screen, even with extra spacing */
+      min-height: 100vh;
+      position: relative;
+    }
+    .hero {
+      position: relative;
+      /* Add extra top padding to push content down */
+      padding: 128px 0 56px;
+      overflow: visible;
+      min-height: 100vh; /* Ensure background covers the whole screen */
+      box-sizing: border-box;
+      display: flex;
+      align-items: flex-start;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      margin: 0 0 12px;
+    }
+    .hero p.subhead {
+      max-width: 760px;
+      margin: 0;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .hero-bg .bg-gradient {
+      position: absolute;
+      inset: -10% -10% -20% -10%;
+      width: 120%;
+      height: 120%;
+      background:
+        radial-gradient(900px 500px at 80% 0%, rgba(92,179,237,0.25), rgba(98,141,203,0.10) 40%, transparent 70%),
+        radial-gradient(700px 500px at 10% 10%, rgba(238,94,109,0.10), transparent 60%);
+      filter: saturate(1.1);
+      pointer-events: none;
+    }
+    .hero-bg .bg-gradient::before,
+    .hero-bg .bg-gradient::after {
+      content: "";
+      position: absolute;
+      width: 60vw;
+      height: 60vw;
+      max-width: 900px;
+      max-height: 900px;
+      border-radius: 50%;
+      filter: blur(60px) saturate(1.15);
+      opacity: 0.55;
+      will-change: transform, opacity, filter;
+    }
+    .hero-bg .bg-gradient::before {
+      top: -10%;
+      left: 55%;
+      background: radial-gradient(circle at 30% 30%, rgba(92,179,237,0.35), rgba(98,141,203,0.20) 45%, transparent 70%);
+      animation: blobFloatA 16s var(--ease-out) infinite alternate;
+    }
+    .hero { position: relative; padding: 96px 0 56px; overflow: hidden; }
+    .hero .container { position: relative; z-index: 1; }
+    .hero h1 { font-size: clamp(36px, 6vw, 64px); margin: 0 0 12px; }
+    .hero p.subhead { max-width: 760px; margin: 0; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg .bg-gradient { position: absolute; inset: -10% -10% -20% -10%; background:
+      radial-gradient(900px 500px at 80% 0%, rgba(92,179,237,0.25), rgba(98,141,203,0.10) 40%, transparent 70%),
+      radial-gradient(700px 500px at 10% 10%, rgba(238,94,109,0.10), transparent 60%);
+      filter: saturate(1.1); pointer-events: none; }
+    .hero-bg .bg-gradient::before,
+    .hero-bg .bg-gradient::after { content: ""; position: absolute; width: 60vw; height: 60vw; max-width: 900px; max-height: 900px; border-radius: 50%; filter: blur(60px) saturate(1.15); opacity: 0.55; will-change: transform, opacity, filter; }
+    .hero-bg .bg-gradient::before { top: -10%; left: 55%; background: radial-gradient(circle at 30% 30%, rgba(92,179,237,0.35), rgba(98,141,203,0.20) 45%, transparent 70%); animation: blobFloatA 16s var(--ease-out) infinite alternate; }
+    .hero-bg .bg-gradient::after { bottom: -10%; left: -10%; background: radial-gradient(circle at 70% 40%, rgba(238,94,109,0.30), rgba(92,179,237,0.12) 40%, transparent 70%); animation: blobFloatB 20s var(--ease-out) infinite alternate; }
+    @keyframes blobFloatA { 0% { transform: translate3d(-6%, 2%, 0) scale(1); filter: blur(60px) saturate(1.1); } 50% { transform: translate3d(3%, -2%, 0) scale(1.04); filter: blur(62px) saturate(1.2); } 100% { transform: translate3d(8%, -6%, 0) scale(1.08); filter: blur(64px) saturate(1.25); } }
+    @keyframes blobFloatB { 0% { transform: translate3d(4%, -2%, 0) scale(1); filter: blur(58px) saturate(1.05); opacity: 0.48; } 50% { transform: translate3d(-2%, 3%, 0) scale(1.05); filter: blur(60px) saturate(1.15); opacity: 0.58; } 100% { transform: translate3d(-6%, 6%, 0) scale(1.1); filter: blur(62px) saturate(1.2); opacity: 0.65; } }
+    .hero-bg .bg-grid { position: absolute; inset: 0; background-image:
+      linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 24px 24px; mask-image: radial-gradient(60% 60% at 50% 30%, black, transparent 70%); }
+    @media (prefers-reduced-motion: reduce) { .hero-bg .bg-gradient::before, .hero-bg .bg-gradient::after { animation: none !important; } }
+
+    /* Carousel */
+    .bleed { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; }
+    .carousel { position: relative; margin-top: 56px; padding-inline: 20px; }
+    @media (min-width: 960px) {
+      .carousel-track { grid-auto-columns: calc(33.333vw - 40px); }
+    }
+                                                                               .carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(720px, 80%); gap: 72px; overflow-x: auto; padding: 24px 128px 32px; scroll-snap-type: x mandatory; scroll-snap-stop: always; scroll-padding-inline: 128px; -webkit-overflow-scrolling: touch; }
+          .carousel-track::-webkit-scrollbar { display: none; }
+      .carousel-slide { scroll-snap-align: center; display: flex; flex-direction: column; justify-content: flex-start; height: clamp(280px, 40vh, 440px); }
+      .carousel-slide h3 { margin: 0 0 8px; min-height: 1.8em; }
+      .carousel-slide p { margin-top: 6px; min-height: 3.2em; }
+      .carousel .controls { display: flex; gap: 8px; justify-content: flex-end; margin: 10px 4px 0; }
+    .carousel .controls .btn { padding: 8px 12px; }
+
+    /* Tighten and elevate How it works */
+    .section--tight { padding-top: 24px; }
+    .how-card { margin: 24px 0 8px; }
+    .how-svg { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.06)); }
+         .card-graphic { display:block; width:100%; height:130px; margin:8px 0 10px; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.06)); border-radius:12px; }
+         .card-graphic * { vector-effect: non-scaling-stroke; }
+     .anim-pan { animation: panX 6s linear infinite; }
+     .anim-scan { animation: scanY 3s ease-in-out infinite; }
+     .anim-pulse { animation: pulse 2.4s ease-in-out infinite; }
+     .anim-rotate { animation: spin 6s linear infinite; transform-origin: center; }
+           @keyframes panX { 0% { transform: translateX(0); } 100% { transform: translateX(-32px); } }
+     @keyframes scanY { 0% { transform: translateY(0); opacity: 0.0; } 20% { opacity: 0.6; } 50% { transform: translateY(60px); opacity: 0.1; } 100% { transform: translateY(0); opacity: 0.0; } }
+     @keyframes pulse { 0% { opacity: 0.35; } 50% { opacity: 0.75; } 100% { opacity: 0.35; } }
+     @media (prefers-reduced-motion: reduce) { .card-graphic * { animation: none !important; } }
+           @keyframes dash { to { stroke-dashoffset: 0; } }
+
+      /* Mobile sizing: ensure a card fits on screen */
+      @media (max-width: 420px) {
+        .carousel { margin-top: 88px; }
+        .carousel-track { gap: 14px; scroll-padding-inline: 10px; padding: 6px 10px 8px; grid-auto-columns: minmax(260px, 92vw); }
+        .carousel-slide { height: clamp(200px, 52vh, 300px); }
+        .carousel-slide h3 { font-size: clamp(17px, 5.5vw, 20px); }
+        .card-graphic { height: 88px; }
+      }
+
+      @media (max-width: 640px) {
+        .carousel { margin-top: 96px; }
+        .carousel-track { gap: 16px; scroll-padding-inline: 12px; padding: 8px 12px 10px; grid-auto-columns: minmax(280px, 90vw); }
+        .carousel-slide { height: clamp(220px, 54vh, 320px); }
+        .carousel-slide h3 { font-size: clamp(18px, 5.2vw, 22px); }
+        .card-graphic { height: 96px; }
+      }
+
+    /* Add space between How it works and carousel */
+    .how-works-spacer {
+      height: 40px;
+    }
+    @media (max-width: 600px) {
+      .how-works-spacer {
+        height: 24px;
+      }
+    }
+  </style>
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header glass" data-theme-surface>
+  <header class="site-header" data-theme-surface style="height:64px">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Vayla home">
-        <img src="/assets/logo/vayla_coral_cutout.svg" alt="Vayla" width="36" height="36">
+        <img src="/assets/logo/vayla_blue_cutout.svg" alt="Vayla" width="36" height="36">
       </a>
       <nav id="primary-nav" class="site-nav" role="navigation" aria-label="Primary">
         <ul>
@@ -34,8 +183,7 @@
             <button class="dropdown-toggle underline-slide" aria-haspopup="true" aria-expanded="false">Vayla</button>
             <ul class="dropdown-menu" role="menu">
               <li><a href="/app.html" class="underline-slide">App</a></li>
-              <li><a href="/mission.html" class="underline-slide">Our Mission</a></li>
-              <li><a href="/contact.html" class="underline-slide">Contact</a></li>
+             <!-- <li><a href="/mission.html" class="underline-slide">Our Mission</a></li> -->              <li><a href="/contact.html" class="underline-slide">Contact</a></li>
             </ul>
           </li>
           <li><a href="/consent.html" class="underline-slide">Consent-based Sharing</a></li>
@@ -46,61 +194,174 @@
         <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
           <span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span><span class="menu-toggle__bar"></span>
         </button>
-        <a class="btn btn--glass-mandy btn--xl hover-lift" href="mailto:je@vayla.example?subject=Vayla%20Waitlist&body=Hi%20Vayla%20team%20%F0%9F%91%8B%0A%0AI%27d%20love%20to%20join%20the%20waitlist!%20%E2%9C%A8%0A%0AName:%20%0AEmail:%20%0AUse%20case:%20%0A%0AThanks!%20%F0%9F%99%8F">Join the waitlist</a>
+        <a class="btn btn--glass-mandy btn--xl hover-lift" href="mailto:hello@vayla.example?subject=Vayla%20Waitlist&body=Hi%20Vayla%20team%20%F0%9F%91%8B%0A%0AI%27d%20love%20to%20join%20the%20waitlist!%20%E2%9C%A8%0A%0AName:%20%0AEmail:%20%0AUse%20case:%20%0A%0AThanks!%20%F0%9F%99%8F">Join the waitlist</a>
       </div>
     </div>
   </header>
 
-  <main id="main" class="section">
-    <div class="container narrow">
-      <h1>Anti-capture Imaging</h1>
-      <p>Vayla’s viewer reduces the value of screenshots and recordings and makes misuse more visible. It’s not about perfect prevention—it’s about meaningful friction, clear expectations, and accountability.</p>
-
-      <div class="grid grid--3" data-reveal="up">
-        <article class="card glass">
-          <h3 class="with-icon">
-            <span class="icon" aria-hidden="true">
-              <!-- Shield -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-            </span>
-            Resists screenshots
-          </h3>
-          <p>Session-aware overlays, dynamic elements, and rendering techniques that reduce capture quality.</p>
-        </article>
-        <article class="card glass">
-          <h3 class="with-icon">
-            <span class="icon" aria-hidden="true">
-              <!-- Eye-off -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
-              </svg>
-            </span>
-            Camera-capture degradation
-          </h3>
-          <p>Visual treatments that reduce clarity when viewed through a secondary device’s camera.</p>
-        </article>
-        <article class="card glass">
-          <h3 class="with-icon">
-            <span class="icon" aria-hidden="true">
-              <!-- Key -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <circle cx="8" cy="8" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                <path d="M11 11l7 7M18 18h3v-3" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-            </span>
-            Audit events
-          </h3>
-          <p>When attempts occur, you get visibility—making expectations explicit and misuse riskier.</p>
-        </article>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
       </div>
-    </div>
+      <div class="container">
+        <h1 id="hero-title">Anti-capture Imaging</h1>
+        <p class="subhead muted">Resist screenshots and recordings, reduce camera capture clarity, and make misuse visible with audit events.</p>
+
+        
+        <div class="carousel bleed" data-carousel>
+          <div class="carousel-track" role="region" aria-label="Key aspects" tabindex="0" style="grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));">
+
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>📵 Anti-capture images</h3>
+              <svg class="card-graphic" viewBox="0 0 600 140" role="img" aria-label="Camera confused by dynamic image">
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#628DCB"/>
+                    <stop offset="100%" stop-color="#5CB3ED"/>
+                  </linearGradient>
+                </defs>
+                <rect x="8" y="8" width="420" height="124" rx="12" fill="url(#g1)" opacity="0.12" stroke="#E4E4E7"/>
+                <g transform="translate(24,22)" stroke="#3A5688" stroke-width="1.5" fill="none" opacity="0.9">
+                  <path class="anim-pan" d="M0 20h420M0 40h420M0 60h420M0 80h420"/>
+                </g>
+                <g transform="translate(460,36)">
+                  <rect x="0" y="0" width="120" height="68" rx="10" fill="#FFFFFF" stroke="#E4E4E7"/>
+                  <circle cx="100" cy="-6" r="14" fill="#EE5E6D"/>
+                  <path d="M16 18h24l8 8v20h-32z" fill="#A1A1AA"/>
+                  <circle cx="52" cy="34" r="10" fill="#A1A1AA"/>
+                </g>
+              </svg>
+              <p>Photos taken off-screen come out scrambled or unusable, while the image looks normal to your viewers.</p>
+            </article>
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>🔐 Encrypted, anonymized access logs</h3>
+              <svg class="card-graphic" viewBox="0 0 600 140" role="img" aria-label="Encrypted, anonymized access log">
+                <defs>
+                  <linearGradient id="logg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#628DCB"/>
+                    <stop offset="100%" stop-color="#5CB3ED"/>
+                  </linearGradient>
+                </defs>
+                <rect x="8" y="8" width="420" height="124" rx="12" fill="url(#logg)" opacity="0.10" stroke="#E4E4E7"/>
+                <g transform="translate(24,22)" stroke="#3A5688" stroke-width="1.5" fill="none" opacity="0.9">
+                  <path d="M0 12h300M0 36h260M0 60h320M0 84h220"/>
+                </g>
+                <g transform="translate(460,20)">
+                  <rect x="0" y="0" width="120" height="100" rx="10" fill="#FFFFFF" stroke="#E4E4E7"/>
+                  <rect class="anim-scan" x="8" y="8" width="104" height="12" rx="6" fill="#A1A1AA" opacity="0.35"/>
+                  <path d="M20 32h80M20 56h64M20 80h72" stroke="#A1A1AA"/>
+                </g>
+              </svg>
+              <p>See what happened without exposing who you are. Events are encrypted and pseudonymized to protect the originator.</p>
+            </article>
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>👤 Verify access with biometrics</h3>
+              <svg class="card-graphic" viewBox="0 0 600 140" role="img" aria-label="Biometric check">
+                <defs>
+                  <linearGradient id="biog" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#628DCB"/>
+                    <stop offset="100%" stop-color="#5CB3ED"/>
+                  </linearGradient>
+                </defs>
+                <rect x="8" y="8" width="420" height="124" rx="12" fill="url(#biog)" opacity="0.10" stroke="#E4E4E7"/>
+                <g transform="translate(36,18)" fill="none" stroke="#3A5688" stroke-width="1.5">
+                  <circle cx="64" cy="56" r="40" opacity="0.25"/>
+                  <circle cx="64" cy="56" r="30" opacity="0.4"/>
+                  <circle cx="64" cy="56" r="20" class="anim-pulse"/>
+                  <path d="M64 16v12M64 84v12M24 56h12M92 56h12" opacity="0.6"/>
+                  <path d="M52 56a12 12 0 1 0 24 0"/>
+                </g>
+                <g transform="translate(460,20)">
+                  <rect x="0" y="0" width="120" height="100" rx="10" fill="#FFFFFF" stroke="#E4E4E7"/>
+                  <rect x="10" y="10" width="100" height="18" rx="9" fill="#A1A1AA" opacity="0.3"/>
+                  <rect x="10" y="38" width="64" height="10" rx="5" fill="#A1A1AA" opacity="0.5"/>
+                  <rect x="10" y="54" width="80" height="10" rx="5" fill="#A1A1AA" opacity="0.5"/>
+                </g>
+              </svg>
+              <p>Gate access with Face ID/Touch ID so only the right person can view-without sharing passwords.</p>
+            </article>
+            <article class="card glass tilt-card carousel-slide" data-theme-surface>
+              <div class="tilt-glare" aria-hidden="true"></div>
+              <h3>🕵️‍♀️ Invisible watermarking (images, video, docs)</h3>
+              <svg class="card-graphic" viewBox="0 0 600 140" role="img" aria-label="Invisible watermark across images, video, and docs">
+                <defs>
+                  <linearGradient id="wmgrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#628DCB"/>
+                    <stop offset="100%" stop-color="#5CB3ED"/>
+                  </linearGradient>
+                </defs>
+                <rect x="8" y="8" width="420" height="124" rx="12" fill="url(#wmgrad)" opacity="0.10" stroke="#E4E4E7"/>
+
+                <!-- File types: image, video, doc -->
+                <g transform="translate(24,22)">
+                  <!-- image -->
+                  <rect x="0" y="0" width="120" height="70" rx="10" fill="#FFFFFF" opacity="0.7" stroke="#E4E4E7"/>
+                  <path d="M10 46l18-18 16 14 12-12 18 16" fill="none" stroke="#3A5688" stroke-width="1.5"/>
+                  <!-- video -->
+                  <rect x="140" y="0" width="120" height="70" rx="10" fill="#FFFFFF" opacity="0.7" stroke="#E4E4E7"/>
+                  <path d="M188 20l24 16-24 16z" fill="#3A5688" opacity="0.7"/>
+                  <!-- doc -->
+                  <rect x="280" y="0" width="120" height="70" rx="10" fill="#FFFFFF" opacity="0.7" stroke="#E4E4E7"/>
+                  <path d="M294 20h88M294 36h72M294 52h80" stroke="#3A5688" stroke-width="1.5"/>
+                </g>
+
+                <!-- moving invisible pattern overlay -->
+                <g class="anim-pan" transform="translate(24,22)" opacity="0.25">
+                  <g fill="#3A5688">
+                    <circle cx="0" cy="8" r="2"/>
+                    <circle cx="40" cy="8" r="2"/>
+                    <circle cx="80" cy="8" r="2"/>
+                    <circle cx="120" cy="8" r="2"/>
+                    <circle cx="160" cy="8" r="2"/>
+                    <circle cx="200" cy="8" r="2"/>
+                    <circle cx="240" cy="8" r="2"/>
+                    <circle cx="280" cy="8" r="2"/>
+                    <circle cx="320" cy="8" r="2"/>
+                    <circle cx="360" cy="8" r="2"/>
+                    <circle cx="0" cy="40" r="2"/>
+                    <circle cx="40" cy="40" r="2"/>
+                    <circle cx="80" cy="40" r="2"/>
+                    <circle cx="120" cy="40" r="2"/>
+                    <circle cx="160" cy="40" r="2"/>
+                    <circle cx="200" cy="40" r="2"/>
+                    <circle cx="240" cy="40" r="2"/>
+                    <circle cx="280" cy="40" r="2"/>
+                    <circle cx="320" cy="40" r="2"/>
+                    <circle cx="360" cy="40" r="2"/>
+                  </g>
+                </g>
+
+                <!-- viewer tile with encoded dot -->
+                <g transform="translate(460,28)">
+                  <rect x="0" y="0" width="120" height="84" rx="10" fill="#FFFFFF" stroke="#E4E4E7"/>
+                  <circle class="anim-pulse" cx="32" cy="42" r="14" fill="#A1A1AA"/>
+                  <path d="M60 42h48" stroke="#A1A1AA"/>
+                </g>
+              </svg>
+              <p>Works across file types to trace leaks back to their source-without visible marks or interrupting how people view.</p>
+            </article>
+          </div>
+        </div>
+        <div class="carousel-controls" style="display:flex; gap:12px; justify-content:center; margin-top:16px;">
+          <button class="btn btn--glass-mandy btn--xl" type="button" data-carousel-prev>
+            ← Prev
+          </button>
+          <button class="btn btn--glass-mandy btn--xl" type="button" data-carousel-next>
+            Next →
+          </button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><div class="brand-inline"><img src="/assets/logo/vayla_blue_filled.svg" alt="" width="24" height="24"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
+      <div><div class="brand-inline"><img src="/assets/logo/vayla_blue_cutout.svg" alt="" width="24" height="24" aria-hidden="true"><span>Vayla</span></div><p class="muted">Private sharing that stays under your control.</p></div>
       <div><h4>Company</h4><ul><li><a href="/mission.html">Our Mission</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
       <div><h4>Product</h4><ul><li><a href="/consent.html">Consent-based Sharing</a></li><li><a href="/anti-capture.html" aria-current="page">Anti-capture Imaging</a></li><li><a href="/app.html">App</a></li></ul></div>
 

@@ -1,4 +1,4 @@
-## Vayla — Private sharing that stays under your control.
+## Vayla - Private sharing that stays under your control.
 
 A fast, minimal static site for GitHub Pages. No frameworks; pure HTML, CSS, and vanilla JS.
 

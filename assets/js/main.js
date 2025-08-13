@@ -245,9 +245,28 @@
     const track = carousel.querySelector('.carousel-track');
     const prev = carousel.querySelector('[data-carousel-prev]');
     const next = carousel.querySelector('[data-carousel-next]');
-    if (!track || !prev || !next) return;
+    if (!track) return;
     const slideWidth = () => track.querySelector('.carousel-slide')?.getBoundingClientRect().width || 320;
-    prev.addEventListener('click', () => { track.scrollBy({ left: -slideWidth() - 14, behavior: 'smooth' }); });
-    next.addEventListener('click', () => { track.scrollBy({ left: slideWidth() + 14, behavior: 'smooth' }); });
+    function go(delta) { track.scrollBy({ left: delta, behavior: 'smooth' }); }
+    if (prev) prev.addEventListener('click', () => go(-slideWidth() - 14));
+    if (next) next.addEventListener('click', () => go(slideWidth() + 14));
+  });
+
+  // Center carousels on middle slide on load (no controls required)
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.carousel-track');
+    if (!track) return;
+    const slides = track.querySelectorAll('.carousel-slide');
+    if (!slides.length) return;
+    const middleIndex = Math.floor(slides.length / 2);
+    const middle = slides[middleIndex];
+    // Defer until layout is ready so measurements are accurate
+    requestAnimationFrame(() => {
+      const rect = middle.getBoundingClientRect();
+      const trackRect = track.getBoundingClientRect();
+      const delta = (rect.left + rect.width / 2) - (trackRect.left + trackRect.width / 2);
+      // Use scrollLeft to set absolute center, avoids compounding with controls
+      track.scrollLeft += delta;
+    });
   });
 })(); 
