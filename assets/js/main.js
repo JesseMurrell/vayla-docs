@@ -21,6 +21,16 @@
     });
   }
 
+  // Header frosted background on scroll (mobile)
+  if (header) {
+    function updateHeaderScrollState() {
+      header.classList.toggle('is-scrolled', window.scrollY > 0);
+    }
+    window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
+    window.addEventListener('load', updateHeaderScrollState);
+    updateHeaderScrollState();
+  }
+
   // Smooth anchor scroll enhancement (respect reduced motion)
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.addEventListener('click', (e) => {
