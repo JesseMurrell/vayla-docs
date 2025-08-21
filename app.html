@@ -65,7 +65,16 @@
     .store-graphic-inline { display: block; max-width: 360px; width: 60%; height: auto; margin: 12px auto 0; border-radius: 12px; }
 
     @media (min-width: 961px) { .hero .hero-card { margin: 0; } }
-    @media (max-width: 640px) { .hero.hero--full { padding: 72px 0 40px; } }
+    @media (max-width: 768px) {
+      .store-graphic-inline { width: 80%; max-width: 280px; }
+    }
+    @media (max-width: 640px) { 
+      .hero.hero--full { padding: 72px 0 40px; }
+      .store-graphic-inline { width: 90%; max-width: 320px; }
+    }
+    @media (max-width: 480px) {
+      .store-graphic-inline { width: 95%; max-width: 280px; }
+    }
     @media (prefers-reduced-motion: reduce) { .title-card--spin { animation: none !important; } }
   </style>
 

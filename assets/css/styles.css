@@ -52,6 +52,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Ensure body background extends for mobile viewport issues */
+html, body {
+  min-height: 100%;
+}
+
+/* Homepage hero background fallback */
+body.hero-page {
+  background: linear-gradient(180deg, 
+    rgba(247,244,241,1) 0%, 
+    rgba(247,244,241,0.95) 100%
+  );
+}
 img, svg { display: inline-block; }
 a { color: var(--brand-chambray); text-decoration: none; }
 a:hover, a:focus { color: var(--brand-danube); }
@@ -59,11 +72,34 @@ a:hover, a:focus { color: var(--brand-danube); }
 .container { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
 .section { padding: 48px 0; }
 .narrow { max-width: var(--content-w); margin: 0 auto; }
+
+/* Responsive container padding */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 12px; }
+  .section { padding: 32px 0; }
+}
 .muted { color: var(--neutral-600); }
 
 /* Heading font pairing */
 h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: 0.2px; }
 .brand .brand-name { font-family: var(--font-heading); }
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  h1 { font-size: clamp(28px, 6vw, 40px); }
+  h2 { font-size: clamp(24px, 5vw, 32px); }
+  h3 { font-size: clamp(20px, 4vw, 24px); }
+  h4 { font-size: clamp(16px, 3vw, 18px); }
+}
+@media (max-width: 480px) {
+  h1 { font-size: clamp(24px, 7vw, 32px); }
+  h2 { font-size: clamp(20px, 6vw, 28px); }
+  h3 { font-size: clamp(18px, 5vw, 22px); }
+  h4 { font-size: clamp(16px, 4vw, 18px); }
+}
 
 /* Focus and accessibility */
 :focus-visible {
@@ -114,6 +150,14 @@ h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: 0.2px; }
 .header-inner {
   display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px;
   min-height: 64px;
+}
+
+/* Responsive header */
+@media (max-width: 480px) {
+  .header-inner {
+    min-height: 56px;
+    gap: 8px;
+  }
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: inherit; justify-self: start; }
 .brand .brand-name { font-weight: 600; letter-spacing: 0.2px; }
@@ -226,6 +270,13 @@ h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: 0.2px; }
   }
 }
 
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+  .site-nav { top: 56px; }
+  .site-nav > ul { padding: 8px 16px 12px; }
+  .header-cta { gap: 8px; }
+}
+
 /* Footer */
 .site-footer { border-top: var(--border); background: var(--neutral-50); margin-top: 48px; }
 .footer-grid {
@@ -284,6 +335,16 @@ h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: 0.2px; }
 
 /* XL button for hero CTA */
 .btn--xl { font-size: var(--fs-18); padding: 14px 22px; border-radius: 14px; }
+
+/* Responsive button sizing */
+@media (max-width: 768px) {
+  .btn { padding: 8px 12px; font-size: var(--fs-14); }
+  .btn--xl { padding: 12px 18px; font-size: var(--fs-16); }
+}
+@media (max-width: 480px) {
+  .btn { padding: 8px 10px; }
+  .btn--xl { padding: 10px 16px; }
+}
 
 /* Hero inline link sizing to match XL button */
 .link--hero-xl { font-size: var(--fs-18); line-height: 1; font-weight: 700; }
@@ -358,6 +419,16 @@ h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: 0.2px; }
   background: var(--neutral-100); border: var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-sm);
 }
 .callout { padding: 20px; border-radius: var(--radius); }
+
+/* Responsive card padding */
+@media (max-width: 768px) {
+  .card { padding: 16px; }
+  .callout { padding: 16px; }
+}
+@media (max-width: 480px) {
+  .card { padding: 14px; }
+  .callout { padding: 14px; }
+}
 .with-icon { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; }
 .icon { color: var(--brand-chambray); }
 
@@ -369,6 +440,20 @@ input, textarea {
   width: 100%; padding: 10px 12px; border-radius: 12px; border: var(--border); background: var(--neutral-100);
   color: var(--neutral-900); transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
   font-size: var(--fs-18);
+}
+
+/* Responsive form inputs */
+@media (max-width: 768px) {
+  input, textarea {
+    padding: 8px 10px;
+    font-size: var(--fs-16);
+  }
+}
+@media (max-width: 480px) {
+  input, textarea {
+    padding: 8px;
+    font-size: var(--fs-16);
+  }
 }
 input:focus-visible, textarea:focus-visible {
   border-color: var(--brand-danube); box-shadow: 0 0 0 2px rgba(98,141,203,0.25);
